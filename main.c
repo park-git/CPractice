@@ -4,26 +4,29 @@
 
 int main() {
     
-    int a,b,c;
-    int count=0;
+    int n;
     
-    for(a=2; a<2000; a++){
-        for(b=1; b<2000; b++){
-            
-            if(b>=a)
-                break;
-            for(c=0; c<2000; c++){
-                if(c>=b)
-                    break;
-                
-                if(a+b+c==2000)
-                    printf("%d, %d, %d\n",a,b,c);
-                count=count+1;
+    int K,start=2;
+    while(1)
+    {
+        scanf("%d",&n);
+        K=n;
+        start=2;
+        while(start<=K)
+        {
+            if(!(K%start))
+            {
+                printf("%d ",start);
+                K/=start;
             }
+            else
+                start++;
+            
         }
+        
+        printf("\n");
     }
 
-    printf("%d\n",count);
     
     return 0;
 }
