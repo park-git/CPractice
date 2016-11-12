@@ -4,13 +4,21 @@
 
 int main() {
     
-    int sum=0;
+    int n1=1;
+    int n2=1;
+    int n3;
     
-    for(int i=0; i<=1000; i++){
-        if(i%3==0)
-            sum = sum+i;
-        if(i%5==0)
-            sum = sum+i;
+    int sum=1;
+    
+    for(int i=3; i<=1000000; i++){
+        
+        n3 = n1 + n2;
+        
+        n1 = n2;
+        n2 = n3;
+        
+        if(i%2==0)
+            sum = n3 + sum;
     }
     
     printf("%d\n",sum);
