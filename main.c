@@ -2,30 +2,62 @@
 #include <stdlib.h>
 #include <string.h>
 
-int recurrence_function(int num);
+int NtoDec(int n,int num, int *arr);
+void DectoM(int m, int sum);
 
 int main(){
     
-    int n,result;
+    int n,m,num,sum;
+    int arr[8];
     
-    scanf("%d",&n);
+    scanf("%d %d",&n,&m);
+    scanf("%d",&num);
     
-    result=recurrence_function(n);
-    
-    printf("%d\n",result);
+    sum = NtoDec(n, num, arr);
+    DectoM(m, sum);
     
     return 0;
 }
-int recurrence_function(int num){
+
+int NtoDec(int n,int num, int *arr){
     
-    printf("parameter = %d\n",num);
+    int divide = 10,time=n;
+    int sum=0;
     
-    if(num==1){
-        printf("return = %d\n",num);
-        return 1;
+    for(int i=7; i>=0; i--){
+        
+        arr[i] = num%divide;
+        num = num - arr[i];
+        
+        if(i!=7){
+            arr[i] = (arr[i]/(divide/10))*n;
+            n = n * time;
+        }
+        divide = divide*10;
+        sum = sum + arr[i];
+        
+        if(num==0)
+            break;
     }
-    else{
-        return num * recurrence_function(num-1);
-    }
-    
+    return sum;
 }
+
+void DectoM(int m, int sum){
+    
+    int brr[8]={0};
+    
+    for(int i=7; i>=0; i--){
+        brr[i] = sum%m;
+        sum = sum/m;
+        
+        if(sum<m){
+            brr[i-1] = sum;
+            break;
+        }
+    }
+    
+    for(int i=0; i<8; i++)
+        printf("%d",brr[i]);
+    printf("(%d)\n",m);
+}
+
