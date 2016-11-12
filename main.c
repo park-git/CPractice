@@ -1,63 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-int NtoDec(int n,int num, int *arr);
-void DectoM(int m, int sum);
-
+int compare(char str1[], char str2[]);
+int a(char *s1, char *s2);
 int main(){
     
-    int n,m,num,sum;
-    int arr[8];
+    int flag;
+    char str1[100];
+    char str2[100];
     
-    scanf("%d %d",&n,&m);
-    scanf("%d",&num);
-    
-    sum = NtoDec(n, num, arr);
-    DectoM(m, sum);
-    
+    while(1){
+        scanf("%s",str1);
+        scanf("%s",str2);
+        
+        flag=compare(str1,str2);
+        
+        if(flag==-1)
+            printf("There is no same word, %d\n",flag);
+        else
+            printf("%d\n",flag);
+    }
     return 0;
 }
 
-int NtoDec(int n,int num, int *arr){
+int compare(char str1[], char str2[]){
     
-    int divide = 10,time=n;
-    int sum=0;
+    int countstr2=0;
+    int count=1;
     
-    for(int i=7; i>=0; i--){
-        
-        arr[i] = num%divide;
-        num = num - arr[i];
-        
-        if(i!=7){
-            arr[i] = (arr[i]/(divide/10))*n;
-            n = n * time;
+    for(int i=0; i<100; i++){
+        if(str1[i]=='_'){
+            count++;
         }
-        divide = divide*10;
-        sum = sum + arr[i];
         
-        if(num==0)
-            break;
-    }
-    return sum;
-}
-
-void DectoM(int m, int sum){
-    
-    int brr[8]={0};
-    
-    for(int i=7; i>=0; i--){
-        brr[i] = sum%m;
-        sum = sum/m;
-        
-        if(sum<m){
-            brr[i-1] = sum;
-            break;
+        if(str1[i]==str2[countstr2]){
+            if(a(&str1[i],&str2[countstr2]))
+                return count;
         }
     }
     
-    for(int i=0; i<8; i++)
-        printf("%d",brr[i]);
-    printf("(%d)\n",m);
+    return -1;
 }
 
+int a(char *s1, char *s2){
+    
+    while(*s2){
+        if(*s2 != *s1)
+            return 0;
+        s1++;
+        s2++;
+    }
+    
+    if(*s1=='_'|| *s1=='\0')
+        return 1;
+    
+    return 0;
+}
