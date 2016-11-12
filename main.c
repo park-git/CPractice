@@ -2,62 +2,62 @@
 #include <stdlib.h>
 #include <string.h>
 
+void find(int *arr,int count);
 
-double bubble_sort(double *arr, int num_elements);
-
-double swap(double *pele);
 
 int main(){
     
-    double math[5] =    {5,4,2,3,1};
-    double korean[5] =  {5,4,2,3,1};
-    double eng[5] =     {5,4,2,3,1};
+    int n;
+    int arr[100];
+    int *parr=NULL;
     
-    double avr[5];
     
-    double *pavr = NULL;
+    scanf("%d",&n);
     
-    for(int i = 0; i<5; i++ ){
-        avr[i] = (math[i] + korean[i] + eng[i]);
-        avr[i] = (avr[i]/3);
-    }
+    for(int i=0; i<n; i++)
+        scanf("%d", &arr[i]);
     
-    pavr = avr;
-    
-    bubble_sort(pavr, 5);
-    
-    for(int i=0; i<5; i++)
-        printf("%f\n", avr[i]);
-    
-    return 0;
-}
-
-double bubble_sort(double *arr, int num_elements){
-    
-    int i,j;
-    
-    for(i=0; i<num_elements; i++){
-        for(j=0; j<num_elements-1; j++){
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n-1; j++){
             if(arr[j]>arr[j+1]){
-                swap(arr+j);
+                int tmp =  arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
             }
         }
-        for(int k =0 ; k<5; k++){
-            printf("%f\n",arr[k]);
-        }
-        printf("\n");
     }
+    
+    parr = arr;
+    
+    find(parr,n);
     
     return 0;
 }
 
-double swap(double *pele){
+void find(int *arr, int count){
     
-    double tmp;
+    int remainder,max,min;
     
-    tmp = *pele;
-    *pele = *(pele+1);
-    *(pele+1) = tmp;
+    for(int i=0; i<count-1; i++){
+        if(i==0)
+            max=*(arr+i),min=*(arr+i+1);
+        else{
+            max = arr[i];
+            min = remainder;
+        }
+        while(1){
+            remainder = max%min;
+            max = min;
+            min = remainder;
+            
+            if(remainder==0){
+                remainder = max;
+                break;
+            }
+        }
+        
+    }
     
-    return 0;
+    printf("%d",remainder);
+    
 }
