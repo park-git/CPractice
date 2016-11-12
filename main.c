@@ -2,62 +2,30 @@
 #include <stdlib.h>
 #include <string.h>
 
-void find(int *arr,int count);
-
+int recurrence_function(int num);
 
 int main(){
     
-    int n;
-    int arr[100];
-    int *parr=NULL;
-    
+    int n,result;
     
     scanf("%d",&n);
     
-    for(int i=0; i<n; i++)
-        scanf("%d", &arr[i]);
+    result=recurrence_function(n);
     
-    for(int i=0; i<n; i++){
-        for(int j=0; j<n-1; j++){
-            if(arr[j]>arr[j+1]){
-                int tmp =  arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = tmp;
-            }
-        }
-    }
-    
-    parr = arr;
-    
-    find(parr,n);
+    printf("%d\n",result);
     
     return 0;
 }
-
-void find(int *arr, int count){
+int recurrence_function(int num){
     
-    int remainder,max,min;
+    printf("parameter = %d\n",num);
     
-    for(int i=0; i<count-1; i++){
-        if(i==0)
-            max=*(arr+i),min=*(arr+i+1);
-        else{
-            max = arr[i];
-            min = remainder;
-        }
-        while(1){
-            remainder = max%min;
-            max = min;
-            min = remainder;
-            
-            if(remainder==0){
-                remainder = max;
-                break;
-            }
-        }
-        
+    if(num==1){
+        printf("return = %d\n",num);
+        return 1;
     }
-    
-    printf("%d",remainder);
+    else{
+        return num * recurrence_function(num-1);
+    }
     
 }
