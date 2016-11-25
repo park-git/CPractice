@@ -20,18 +20,22 @@ int isPrime(int num) {
 
 int main(){
     
-    int n,a,k=0;
+    int n,m,sum=0,min=0;
     
-    scanf("%d",&n);
+    scanf("%d %d",&n,&m);
     
-    for(int i=0; i<n; i++){
-        scanf("%d",&a);
-        if(isPrime(a)){
-            k++;
+    for(int i=n; i<=m; i++){
+        if(isPrime(i)){
+            if(sum==0)
+                min = i;
+            sum = sum+i;
         }
     }
     
-    printf("%d",k);
+    if(sum ==0)
+        printf("-1");
+    else
+        printf("%d\n%d",sum,min);
     
     return 0;
 }
