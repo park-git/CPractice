@@ -5,6 +5,8 @@
 //////  scanf("%[^\n]", str); -> \n 즉 엔터를 제외한 모든 문자열을 받는다.
 //////  fgets(<#char *restrict#>, sizeof(), stdin)
 
+
+////////////////////// 소수 판별 함수 //////////////////////
 int isPrime(int num) {
     
     int i = 0;
@@ -17,25 +19,18 @@ int isPrime(int num) {
     }
     return 1;
 }
+////////////////////// 소수 판별 함수 //////////////////////
+
 
 int main(){
     
-    int n,m,sum=0,min=0;
+    int n,m;
     
     scanf("%d %d",&n,&m);
     
-    for(int i=n; i<=m; i++){
-        if(isPrime(i)){
-            if(sum==0)
-                min = i;
-            sum = sum+i;
-        }
-    }
-    
-    if(sum ==0)
-        printf("-1");
-    else
-        printf("%d\n%d",sum,min);
+    for(int i=n; i<=m; i++)
+        if(isPrime(i))
+            printf("%d\n",i);
     
     return 0;
 }
