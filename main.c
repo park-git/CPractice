@@ -5,27 +5,33 @@
 //////  scanf("%[^\n]", str); -> \n 즉 엔터를 제외한 모든 문자열을 받는다.
 //////  fgets(<#char *restrict#>, sizeof(), stdin)
 
+int isPrime(int num) {
+    
+    int i = 0;
+    
+    if (num < 2)
+        return 0;
+    for (i = 2; i*i <= num; i += 1) {
+        if (num % i == 0)
+            return 0;
+    }
+    return 1;
+}
+
 int main(){
     
-    int arr[1000];
-    int n;
+    int n,a,k=0;
+    
     scanf("%d",&n);
     
-    for(int i=0; i<n; i++)
-        scanf("%d",&arr[i]);
-    
     for(int i=0; i<n; i++){
-        for(int j=0; j<n-1; j++){
-            if(arr[j]>arr[j+1]){
-                int tmp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = tmp;
-            }
+        scanf("%d",&a);
+        if(isPrime(a)){
+            k++;
         }
     }
     
-    for(int i=0; i<n; i++)
-        printf("%d\n",arr[i]);
+    printf("%d",k);
     
     return 0;
 }
