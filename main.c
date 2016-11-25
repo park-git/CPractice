@@ -5,28 +5,27 @@
 //////  scanf("%[^\n]", str); -> \n 즉 엔터를 제외한 모든 문자열을 받는다.
 //////  fgets(<#char *restrict#>, sizeof(), stdin)
 
-int x,n=1,i=1;
-
 int main(){
     
-    scanf("%d",&x);
+    int arr[1000];
+    int n;
+    scanf("%d",&n);
     
-    while(1){
-        if(x<=n)
-            break;
-        
-        i++;
-        n = (i*(i+1))/2;
+    for(int i=0; i<n; i++)
+        scanf("%d",&arr[i]);
+    
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n-1; j++){
+            if(arr[j]>arr[j+1]){
+                int tmp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tmp;
+            }
+        }
     }
     
-    int k = n-x;
-    
-    if(i%2!=0){
-        printf("%d/%d",k+1,i-k);
-    }
-    else{
-        printf("%d/%d",i-k,k+1);
-    }
+    for(int i=0; i<n; i++)
+        printf("%d\n",arr[i]);
     
     return 0;
 }
