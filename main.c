@@ -4,89 +4,146 @@
 
 //////  scanf("%[^\n]", str); -> \n 즉 엔터를 제외한 모든 문자열을 받는다.
 //////  fgets(<#char *restrict#>, sizeof(), stdin)
+int push(int *arr,int *Front, int *Back, int x){
+    
+    if(arr[*Front] == 0)
+    {
+        arr[(*Front)] = x;
+        return 0;
+    }
+    
+    *Back = *Back+1;
+    arr[*Back]=x;
 
-int arr[100000];
-int indexArr=-1;
-
-void push(int x){
-    indexArr++;
-    arr[indexArr]=x;
+    return 0;
 }
-int pop(){
-    if(indexArr==-1){
+int pop(int *arr,int *Front, int *Back){
+    
+    if(*Front == *Back)
+    {
+        if(arr[*Front]!=0)
+        {
+            printf("%d\n",arr[*Front]);
+            arr[*Front]='\0';
+            return 0;
+        }
+        
         printf("-1\n");
         return 0;
     }
     
-    printf("%d\n",arr[indexArr]);
-    arr[indexArr]='\0';
-    indexArr--;
+    printf("%d\n",arr[*Front]);
+    
+    arr[*Front]='\0';
+    *Front=*Front+1;
     
     return 0;
 }
-int size(){
-    
-    printf("%d\n",indexArr+1);
-    
-    return 0;
-}
-int empty(){
-    
-    if(indexArr==-1){
-        printf("1\n");
-        return 0;
-    }
-    else{
+int size(int *arr,int *Front, int *Back){
+    if(*Front == *Back)
+    {
+        if(arr[*Front]!=0)
+        {
+            printf("1\n");
+            return 0;
+        }
+        
         printf("0\n");
         return 0;
     }
+    printf("%d\n",*Back-*Front+1);
+    return 0;
 }
-int top(){
+int empty(int *arr, int *Front,int *Back){
     
-    if(indexArr==-1){
+    if(*Front == *Back)
+    {
+        if(arr[*Front]!=0)
+        {
+            printf("0\n");
+            return 0;
+        }
+        
+        printf("1\n");
+        return 0;
+    }
+        printf("0\n");
+        return 0;
+}
+int front(int *arr,int *Front, int *Back){
+    if(*Front == *Back)
+    {
+        if(arr[*Front]!=0)
+        {
+            printf("%d\n",arr[*Front]);
+            return 0;
+        }
+        
         printf("-1\n");
         return 0;
     }
     
-    printf("%d\n",arr[indexArr]);
+    printf("%d\n",arr[*Front]);
     
     return 0;
 }
-
-
+int back(int *arr,int *Front, int *Back){
+    if(*Front == *Back)
+    {
+        if(arr[*Back]!=0)
+        {
+            printf("%d\n",arr[*Back]);
+            return 0;
+        }
+        
+        printf("-1\n");
+        return 0;
+    }
+    
+    printf("%d\n",arr[*Back]);
+    return 0;
+}
 int main(){
     
     int n,x;
-    char functionNmae[10];
+    int arr[10000];
+    char msg[10];
+    int arrFront=0,arrBack=0;
+    
     scanf("%d",&n);
     
     for(int i=0; i<n; i++){
-        scanf("%s",functionNmae);
+        scanf("%s",msg);
         
-        if(strcmp(functionNmae, "push")==0)
-        {
-            scanf("%d",&x);
-            push(x);
-        }
-        
-        else if(strcmp(functionNmae, "pop")==0)
-        {
-            pop();
-        }
-        
-        else if(strcmp(functionNmae, "size")==0)
-        {
-            size();
-        }
-        
-        else if(strcmp(functionNmae, "empty")==0)
-        {
-            empty();
-        }
-        
-        else if(strcmp(functionNmae, "top")==0)
-        {
-            top();
+        switch (msg[0]) {
+            case 'p':
+                
+                if(msg[1]=='u'){
+                    scanf("%d",&x);
+                    push(arr,&arrFront,&arrBack,x);
+                }
+                else
+                    pop(arr,&arrFront,&arrBack);
+                break;
+                
+            case 's':
+                size(arr,&arrFront,&arrBack);
+                break;
+                
+            case 'e':
+                empty(arr,&arrFront,&arrBack);
+                break;
+                
+            case 'f':
+                front(arr,&arrFront,&arrBack);
+                break;
+                
+            case 'b':
+                back(arr,&arrFront,&arrBack);
+                break;
+                
+            default:
+                break;
         }
     }
     
