@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
 
     int a;
     
-    printf("%d",a=3);
+    printf("%d\n",a);
     
     
     return 0;
